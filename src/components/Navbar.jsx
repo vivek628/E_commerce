@@ -77,7 +77,8 @@ function Header() {
 )}
 
 
-           {isGuestUser?(
+           {!isHomePage
+           ?(
             <NavLink to="/cart" className="relative text-gray-800 hover:text-black">
               <i className="ri-shopping-cart-fill text-5xl"></i>
               <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
