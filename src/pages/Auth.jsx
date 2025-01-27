@@ -40,7 +40,6 @@ const Auth = () => {
       if (isLogin) {
         // Login with Firebase
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log('Logged in user:', userCredential.user); 
         navigate('/all')
         
       } else {

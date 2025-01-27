@@ -1,15 +1,18 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { auth } from '../firebase/firebase-config'; // Firebase auth
+import { auth } from '../firebase/firebase-config'; 
+import { useLocation } from 'react-router-dom';
 
 const ProtectedRoute = () => {
-  const user = auth.currentUser;
-  
-  if (!user) {
-    alert('You must be logged in to view this page!');
-    return <Navigate to="/" />;
+  let user = auth.currentUser;
+   const location = useLocation(); 
+   const isGuestUser = location.pathname === '/guestuser';
+  if(isGuestUser){
+    user="guestuser"
   }
-
+  if(user==="guestuser"){
+    return <Outlet />; 
+  }
   return <Outlet />;  
 };
 

@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import SearchBar from '../components/SearchBar'; 
+import SearchBar from '../components/SearchBar';
+import Modal from '../components/Modal'; // Import the Modal component
 
 function CategoryPage() {
-  const { categoryId } = useParams(); 
+  const { categoryId } = useParams(); // Get categoryId from the URL
   const [productData, setProductData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null); // State to track selected product
 
   useEffect(() => {
     async function fetchProductData() {
@@ -20,12 +22,13 @@ function CategoryPage() {
       } catch (error) {
         console.error("Error fetching product data:", error);
       } finally {
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     }
 
     fetchProductData();
   }, [categoryId]);
+
   const handleSearchChange = (query) => {
     setSearchQuery(query);
     if (query === "") {
@@ -38,29 +41,41 @@ function CategoryPage() {
       setFilteredProducts(filtered);
     }
   };
- 
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product); // Set the clicked product to the selectedProduct state
+  };
+
+  const closeModal = () => {
+    setSelectedProduct(null); // Close the modal by clearing the selected product
+  };
+
   return (
     <div className="p-6">
       <SearchBar searchQuery={searchQuery} setSearchQuery={handleSearchChange} />
+
       {isLoading && (
         <div className="flex justify-center items-center min-h-screen">
           <div className="border-4 border-t-4 border-blue-500 border-solid rounded-full w-16 h-16 animate-spin"></div>
         </div>
       )}
+
       {!isLoading && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                productData={product}
-              />
+              <div key={product.id} onClick={() => handleProductClick(product)}>
+                <ProductCard productData={product} />
+              </div>
             ))
           ) : (
             <p className="text-center text-gray-600">No products found</p>
           )}
         </div>
       )}
+
+      {/* Render the Modal if a product is selected */}
+      {selectedProduct && <Modal productData={selectedProduct} onClose={closeModal} />}
     </div>
   );
 }
