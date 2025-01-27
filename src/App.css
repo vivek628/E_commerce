@@ -1,0 +1,11 @@
+#root {
+  width: 100vw;
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  
+}
+
+html, body {
+  overflow-x: hidden; 
+}
