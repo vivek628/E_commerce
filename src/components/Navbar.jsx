@@ -77,14 +77,14 @@ function Header() {
 )}
 
 
-          {auth.currentUser && (
+          
             <NavLink to="/cart" className="relative text-gray-800 hover:text-black">
               <i className="ri-shopping-cart-fill text-5xl"></i>
               <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
                 {cart.length}
               </span>
             </NavLink>
-          )}
+          
         </div>
 
         {/* Mobile Menu Button */}
@@ -109,7 +109,7 @@ function Header() {
           <NavLink to="/category/3" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "Furniture" : ""}</NavLink>
           <NavLink to="/category/4" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "Toys" : ""}</NavLink>
           <h2 className='text-red-500'>{user}</h2>
-          <NavLink to="/orders" className={`${getLinkClassName} block py-2`}>{isGuestUser ? "My Orders" : ""}</NavLink>
+          <NavLink to="/orders" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "My Orders" : ""}</NavLink>
           
           <NavLink to="/account" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "Account" : ""}</NavLink>
          
@@ -117,14 +117,14 @@ function Header() {
             {auth.currentUser ? "Logout" : "Login"}
           </NavLink>
 
-          {auth.currentUser && (
+         
             <NavLink to="/cart" className="relative text-gray-800 hover:text-black block py-2">
               <i className="ri-shopping-cart-fill text-3xl"></i>
               <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
                 {cart.length}
               </span>
             </NavLink>
-          )}
+          
         </div>
       )}
     </nav>

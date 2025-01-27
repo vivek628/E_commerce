@@ -1,7 +1,8 @@
 import React from "react";
 
 const Modal = ({ productData, onClose }) => {
-    console.log(productData.images[0])
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <div
       style={{
@@ -12,7 +13,7 @@ const Modal = ({ productData, onClose }) => {
         height: "100%",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         display: "flex",
-        justifyContent: "flex-end", 
+        justifyContent: isMobile ? "center" : "flex-end", // Center on mobile, right on desktop
         alignItems: "center",
         zIndex: 1000,
       }}
@@ -21,8 +22,8 @@ const Modal = ({ productData, onClose }) => {
       <div
         style={{
           backgroundColor: "white",
-          width: "30%",
-          height: "100%",
+          width: isMobile ? "100%" : "30%", // Full width on mobile, 30% on desktop
+          height: "80%",
           padding: "20px",
           boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
           position: "relative",
@@ -43,12 +44,9 @@ const Modal = ({ productData, onClose }) => {
         >
           &times;
         </button>
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "60px" }}>
           {/* Render product details here */}
-            <img
-                src={productData.images[0]}
-                alt={productData.name}
-                style={{ width: "100%" }}></img>
+          <img src={productData.images[0]} alt={productData.name} style={{ width: "100%" }} />
           <h2>{productData.name}</h2>
           <p>{productData.description}</p>
           <p>Price: ${productData.price}</p>
