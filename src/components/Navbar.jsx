@@ -85,7 +85,6 @@ function Header() {
               </span>
             </NavLink>
           )}
-          {isHomePage && (<NavLink to="/guestuser" className={getLinkClassName}>Guest User</NavLink>)}
         </div>
 
         {/* Mobile Menu Button */}
@@ -110,7 +109,7 @@ function Header() {
           <NavLink to="/category/3" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "Furniture" : ""}</NavLink>
           <NavLink to="/category/4" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "Toys" : ""}</NavLink>
           <h2 className='text-red-500'>{user}</h2>
-          <NavLink to="/orders" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "My Orders" : ""}</NavLink>
+          <NavLink to="/orders" className={`${getLinkClassName} block py-2`}>{isGuestUser ? "My Orders" : ""}</NavLink>
           
           <NavLink to="/account" className={`${getLinkClassName} block py-2`}>{!isHomePage ? "Account" : ""}</NavLink>
          

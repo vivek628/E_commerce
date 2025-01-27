@@ -50,7 +50,7 @@ function All() {
   return (
     <div className="p-6">
       <SearchBar searchQuery={searchQuery} setSearchQuery={handleSearchChange} />
-
+      
       {isLoading && (
         <div className="flex justify-center items-center min-h-screen">
           <div className="border-4 border-t-4 border-blue-500 border-solid rounded-full w-16 h-16 animate-spin"></div>
@@ -61,11 +61,8 @@ function All() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div key={product.id}>
-                <ProductCard
-                  productData={product}
-                  onProductClick={handleProductClick} // Pass the handler to the ProductCard
-                />
+              <div key={product.id} onClick={() => handleProductClick(product)}>
+                <ProductCard productData={product} />
               </div>
             ))
           ) : (

@@ -19,7 +19,9 @@ const Auth = () => {
     setIsLogin(!isLogin);
     setError(''); // Reset any error when toggling between login/signup
   };
-
+  const GuestUserhandler=()=>{
+    navigate('/guestuser')
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -126,6 +128,12 @@ const Auth = () => {
             className="text-sm text-indigo-600 hover:text-indigo-800"
           >
             {isLogin ? 'Don\'t have an account? Sign up' : 'Already have an account? Login'}
+          </button>
+          <button
+            onClick={GuestUserhandler}
+            className="text-sm text-indigo-600 hover:text-indigo-800"
+          >
+            Don't have an account? Login as guest User
           </button>
         </div>
       </div>
